@@ -3,10 +3,14 @@ import './Filter.scss';
 
 const Filter = ({
     filterName,
-    isSelected
+    isSelected,
+    handleSelect
 }) => {
     return (
-        <div className={`filter ${isSelected ? "filter--selected" : ""}`}>
+        <div
+            className={`filter ${isSelected ? "filter--selected" : ""}`}
+            onClick={() => handleSelect(filterName)}
+        >
             {filterName}
         </div>
     )
