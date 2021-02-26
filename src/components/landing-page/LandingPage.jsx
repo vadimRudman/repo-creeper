@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './LandingPage.scss';
+import SearchHeader from '../search-header/SearchHeader';
+import FilterOptions from '../filter-options/FilterOptions';
+import RepoCardList from '../repo-card-list';
 
 const LandingPage = () => {
     const [repoName, setRepoName] = useState('');
