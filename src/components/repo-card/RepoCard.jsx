@@ -1,12 +1,10 @@
 import React from 'react';
-import './BasicPage.scss';
+import './RepoCard.scss';
 
 const RepoCard = ({
-    repoName,
-    repoDescription,
-    numOfStargazers,
-    numOfPeopleWatching
+    repoCardData
 }) => {
+    const { repoName, repoDescription, numOfStargazers, numOfPeopleWatching } = repoCardData;
     return (
         <div className='repo-card'>
             <h3>{repoName}</h3>
