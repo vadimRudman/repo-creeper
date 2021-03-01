@@ -6,6 +6,7 @@ import { parseRepoProjectsData } from '../../tools/repoListParser';
 import SearchHeader from '../search-header/SearchHeader';
 import FilterOptions from '../filter-options/FilterOptions';
 import RepoCardList from '../repo-card-list/RepoCardList';
+import ErrorDisplay from '../error-display/ErrorDisplay';
 
 const LandingPage = () => {
     const [repoName, setRepoName] = useState('');
@@ -15,6 +16,7 @@ const LandingPage = () => {
     const searchRepo = repoName => {
         fetchRepoData(repoName)
             .then(response => {
+                console.log(response);
                 setRepoProjects((parseRepoProjectsData(response.data)));
                 setIsDisplayError(false);
             })
@@ -22,29 +24,32 @@ const LandingPage = () => {
                 console.log("im a sophisticated error logger :)", error);
                 setIsDisplayError(true);
                 setRepoProjects([]);
+                console.log('got here');
             });
     }
 
     useEffect(() => {
-        console.log(searchRepo('AppDirect'));
-    });
+        searchRepo('AppDirect');
+        console.log(isDisplayError);
+    }, []);
 
     const renderDisplay = () => (
         <React.Fragment>
             <FilterOptions />
-            <RepoCardList />
+            <RepoCardList repoCardsData={repoProjects}/>
         </React.Fragment>
     );
 
-    const renderError = () => {
+    const renderError = () => (
         <ErrorDisplay />
-    }
+    );
 
 
     return (
         <div className="landing-page">
             <SearchHeader />
             <h2>Listing repositories for the user "{repoName}"</h2>
+            {isDisplayError ? renderError() : renderDisplay()}
         </div>
     )
 };
