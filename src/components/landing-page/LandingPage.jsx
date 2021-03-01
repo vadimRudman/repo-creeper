@@ -27,8 +27,10 @@ const LandingPage = () => {
     }
 
     useEffect(() => {
-        searchRepo('AppDirect');
-    }, []);
+        if (repoName) {
+            searchRepo(repoName);
+        }
+    }, [repoName]);
 
     const renderDisplay = () => (
         <React.Fragment>
@@ -44,7 +46,7 @@ const LandingPage = () => {
 
     return (
         <div className="landing-page">
-            <SearchHeader />
+            <SearchHeader onSearch={setRepoName}/>
             <h2>Listing repositories for the user "{repoName}"</h2>
             {isDisplayError ? renderError() : renderDisplay()}
         </div>
