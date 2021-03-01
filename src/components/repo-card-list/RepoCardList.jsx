@@ -6,7 +6,7 @@ const RepoCardList = ({
     repoCardsData
 }) => {
     const renderRepoCard = repoCard => (
-        <RepoCard repoCardData={repoCard} />
+        <RepoCard data-testid={"repoCard"} repoCardData={repoCard} key={repoCard.full_name} />
     );
 
     const repoCards = repoCardsData

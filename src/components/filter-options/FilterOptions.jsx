@@ -18,12 +18,13 @@ const FilterOptions = ({
             filterName={filterName}
             isSelected={selectedFilterName === filterName}
             handleSelect={handleSelect}
+            key={filterName}
         />
     );
     return (
         <div className={"filter-options"}>
             <span className={"filter-options__title"}>Sort By</span>
-            <div className={"filter-options__container"}>
+            <div className={"filter-options__container"} >
                 {filterList.map(renderFilters)}
             </div>
         </div>

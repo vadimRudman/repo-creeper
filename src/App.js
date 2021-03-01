@@ -2,7 +2,7 @@ import LandingPage from './components/landing-page/LandingPage';
 
 function App() {
 	return (
-		<LandingPage />
+		<LandingPage data-testid={"landing"} />
 	);
 }
 
