@@ -1,0 +1,34 @@
+.search-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #2B2B2B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 12px;
+    &__actions-wrapper {
+        display: flex;
+        align-items: center;
+        width: 25%;
+        min-width: 315px;
+        justify-content: flex-end;
+    }
+    &__title {
+        width: 25%;
+        min-width: 315px;
+        margin-right: 12px;
+    };
+    &__input {
+        height: 35px;
+        width: 50%;
+        background-color: lightgray;
+        margin-right: 12px;
+    };
+    &__button {
+        border-radius: 8px;
+        height: 41px;
+        width: 19%;
+    };
+}
