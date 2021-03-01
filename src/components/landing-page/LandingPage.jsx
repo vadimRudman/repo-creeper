@@ -16,7 +16,6 @@ const LandingPage = () => {
     const searchRepo = repoName => {
         fetchRepoData(repoName)
             .then(response => {
-                console.log(response);
                 setRepoProjects((parseRepoProjectsData(response.data)));
                 setIsDisplayError(false);
             })
@@ -24,13 +23,11 @@ const LandingPage = () => {
                 console.log("im a sophisticated error logger :)", error);
                 setIsDisplayError(true);
                 setRepoProjects([]);
-                console.log('got here');
             });
     }
 
     useEffect(() => {
         searchRepo('AppDirect');
-        console.log(isDisplayError);
     }, []);
 
     const renderDisplay = () => (

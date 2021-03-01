@@ -9,7 +9,9 @@ const RepoCardList = ({
         <RepoCard repoCardData={repoCard} />
     );
 
-    const repoCards = repoCardsData.map(renderRepoCard);
+    const repoCards = repoCardsData
+        ? repoCardsData.map(renderRepoCard)
+        : null;
     return (
         <div className="repo-card-list">
             {repoCards}
