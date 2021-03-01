@@ -9,10 +9,10 @@ const RepoCard = ({
         <div className='repo-card'>
             <h3>{full_name}</h3>
             <div className='repo-card__stats'>
-                <span>
+                <span className='repo-card__stargazers'>
                     {stargazers_count} Stargazers
                 </span>
-                <span>
+                <span className='repo-card__watchers'>
                     {watchers_count} People Watching
                 </span>
             </div>

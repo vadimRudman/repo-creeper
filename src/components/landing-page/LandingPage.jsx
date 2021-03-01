@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './LandingPage.scss';
 import { fetchRepoData } from '../../tools/repoFetch';
-import { parseRepoProjectsData } from '../../tools/repoListParser';
+import { parseRepoProjectsData, sortByAlpha, sortByStars } from '../../tools/repoListParser';
+import { ALPHABETICAL, STARS } from '../../constants/filters';
 
 import SearchHeader from '../search-header/SearchHeader';
 import FilterOptions from '../filter-options/FilterOptions';
@@ -11,12 +12,24 @@ import ErrorDisplay from '../error-display/ErrorDisplay';
 const LandingPage = () => {
     const [repoName, setRepoName] = useState('');
     const [repoProjects, setRepoProjects] = useState([]);
+    const [sortType, setSortType] = useState(ALPHABETICAL);
     const [isDisplayError, setIsDisplayError] = useState(false);
 
     const searchRepo = repoName => {
         fetchRepoData(repoName)
             .then(response => {
-                setRepoProjects((parseRepoProjectsData(response.data)));
+                const parsedRepos = (parseRepoProjectsData(response.data));
+                switch (sortType) {
+                    case ALPHABETICAL: {
+                        setRepoProjects(sortByAlpha(parsedRepos));
+                        break;
+                    }
+                    case STARS:
+                        setRepoProjects(sortByStars(parsedRepos));
+                        break;
+                    default:
+                        setRepoProjects(parsedRepos);
+                };
                 setIsDisplayError(false);
             })
             .catch(error => {
@@ -34,7 +47,7 @@ const LandingPage = () => {
 
     const renderDisplay = () => (
         <React.Fragment>
-            <FilterOptions />
+            <FilterOptions onSort={setSortType} />
             <RepoCardList repoCardsData={repoProjects}/>
         </React.Fragment>
     );
