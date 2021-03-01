@@ -21,10 +21,12 @@ const LandingPage = () => {
                 const parsedRepos = (parseRepoProjectsData(response.data));
                 switch (sortType) {
                     case ALPHABETICAL: {
+                        console.log(sortByAlpha(parsedRepos));
                         setRepoProjects(sortByAlpha(parsedRepos));
                         break;
                     }
                     case STARS:
+                        console.log(sortByStars(parsedRepos));
                         setRepoProjects(sortByStars(parsedRepos));
                         break;
                     default:
@@ -43,7 +45,7 @@ const LandingPage = () => {
         if (repoName) {
             searchRepo(repoName);
         }
-    }, [repoName]);
+    }, [repoName, sortType]);
 
     const renderDisplay = () => (
         <React.Fragment>
