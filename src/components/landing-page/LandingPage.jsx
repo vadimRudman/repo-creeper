@@ -1,17 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LandingPage.scss';
+import { fetchRepoData } from '../../tools/repoFetch';
+import { parseRepoProjectsData } from '../../tools/repoListParser';
+
 import SearchHeader from '../search-header/SearchHeader';
 import FilterOptions from '../filter-options/FilterOptions';
-import RepoCardList from '../repo-card-list';
+import RepoCardList from '../repo-card-list/RepoCardList';
 
 const LandingPage = () => {
     const [repoName, setRepoName] = useState('');
+    const [repoProjects, setRepoProjects] = useState([]);
+    const [isDisplayError, setIsDisplayError] = useState(false);
+
+    const searchRepo = repoName => {
+        fetchRepoData(repoName)
+            .then(response => {
+                setRepoProjects((parseRepoProjectsData(response.data)));
+                setIsDisplayError(false);
+            })
+            .catch(error => {
+                console.log("im a sophisticated error logger :)", error);
+                setIsDisplayError(true);
+                setRepoProjects([]);
+            });
+    }
+
+    useEffect(() => {
+        console.log(searchRepo('AppDirect'));
+    });
+
+    const renderDisplay = () => (
+        <React.Fragment>
+            <FilterOptions />
+            <RepoCardList />
+        </React.Fragment>
+    );
+
+    const renderError = () => {
+        <ErrorDisplay />
+    }
+
+
     return (
         <div className="landing-page">
             <SearchHeader />
             <h2>Listing repositories for the user "{repoName}"</h2>
-            <FilterOptions />
-            <RepoCardList />
         </div>
     )
 };
