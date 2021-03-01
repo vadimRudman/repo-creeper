@@ -48,7 +48,9 @@ const LandingPage = () => {
         <div className="landing-page">
             <SearchHeader onSearch={setRepoName}/>
             <h2>Listing repositories for the user "{repoName}"</h2>
-            {isDisplayError ? renderError() : renderDisplay()}
+            <div className="landing-page__display-wrapper">
+                {isDisplayError ? renderError() : renderDisplay()}
+            </div>
         </div>
     )
 };

@@ -15,8 +15,8 @@ const FilterOptions = () => {
     );
     return (
         <div className={"filter-options"}>
-            <span>Sort By</span>
-            <div className={"filter-options--container"}>
+            <span className={"filter-options__title"}>Sort By</span>
+            <div className={"filter-options__container"}>
                 {filterList.map(renderFilters)}
             </div>
         </div>
